@@ -21,4 +21,5 @@ As a player, you will grapple with the weighty responsibility of altering or pre
 
 ## About
 This text-based adventure game was developed by Matthew Wozniak.
+
 For more information about the game or the developer, please connect with him through his [LinkedIn](https://www.linkedin.com/in/matthew-wozniak/).
