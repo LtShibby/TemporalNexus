@@ -5,8 +5,8 @@
       "description": "Assassination of John F. Kennedy"
     },
     "choices": {
-      "1. Prevent the assassination": "Branch 9: Kennedy's Preservation",
-      "2. Let the assassination happen": "Branch 10: Oswald's Triumph"
+      "1. Prevent the assassination": "eventScenario8",
+      "2. Let the assassination happen": "eventScenario9"
     }
   }
   

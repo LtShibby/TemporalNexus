@@ -5,8 +5,8 @@
       "description": "Assassination of Martin Luther King Jr."
     },
     "choices": {
-      "1. Prevent the assassination": "Branch 11: King's Preservation",
-      "2. Let the assassination happen": "Branch 12: Ray's Triumph"
+      "1. Prevent the assassination": "eventScenario10",
+      "2. Let the assassination happen": "eventScenario11"
     }
   }
   

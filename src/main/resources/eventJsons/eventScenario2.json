@@ -5,7 +5,7 @@
     "description": "Assassination of Abraham Lincoln"
   },
   "choices": {
-    "1. Prevent the assassination": "Branch 5: Lincoln's Preservation",
-    "2. Let the assassination happen": "Branch 6: Booth's Triumph"
+    "1. Prevent the assassination": "eventScenario4",
+    "2. Let the assassination happen": "eventScenario5"
   }
 }

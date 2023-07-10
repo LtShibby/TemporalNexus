@@ -1,28 +1,73 @@
 package com.wozniak.game.TemporalNexus;
 
+import com.wozniak.game.TemporalNexus.models.events.EventChoice;
 import com.wozniak.game.TemporalNexus.models.events.EventScenario;
 import com.wozniak.game.TemporalNexus.utils.EventUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class TemporalNexusGame {
-    public static void main(String[] args) {
-        String configFile = "TemporalNexus\\config.properties";
-        Properties configProperties = new Properties();
 
-        try (FileInputStream fileInputStream = new FileInputStream(configFile)) {
-            configProperties.load(fileInputStream);
-        } catch (IOException e) {
-            System.out.println("Error loading config.properties file: " + e.getMessage());
+    private static final String CONFIG_FILE = "TemporalNexus\\config.properties";
+    private static final String JSON_FOLDER_PATH_KEY = "json.folderPath";
+    private static final String EXIT_CHOICE = "exit";
+
+    private Properties configProperties;
+    private List<EventScenario> eventScenarios;
+    private EventScenario currentEventScenario;
+
+    public static void main(String[] args) {
+        TemporalNexusGame game = new TemporalNexusGame();
+        game.start();
+    }
+
+    public void start() {
+        if (!loadConfigProperties()) {
             return;
         }
 
-        String folderPath = configProperties.getProperty("json.folderPath");
-        List<EventScenario> eventScenarios = new ArrayList<>();
+        if (!loadEventScenarios()) {
+            return;
+        }
+
+        setCurrentEventScenario(eventScenarios.get(0));
+
+        Scanner scanner = new Scanner(System.in);
+        while (currentEventScenario != null) {
+            System.out.println("Scene: " + currentEventScenario.getCurrentScene().getDescription());
+            displayChoices();
+
+            String choice = scanner.nextLine();
+            if (choice.equalsIgnoreCase(EXIT_CHOICE)) {
+                break;
+            }
+
+            EventScenario nextEventScenario = getNextEventScenario(choice);
+            if (nextEventScenario != null) {
+                setCurrentEventScenario(nextEventScenario);
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private boolean loadConfigProperties() {
+        configProperties = new Properties();
+        try (FileInputStream fileInputStream = new FileInputStream(CONFIG_FILE)) {
+            configProperties.load(fileInputStream);
+            return true;
+        } catch (IOException e) {
+            System.out.println("Error loading config.properties file: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private boolean loadEventScenarios() {
+        String folderPath = configProperties.getProperty(JSON_FOLDER_PATH_KEY);
+        eventScenarios = new ArrayList<>();
 
         File folder = new File(folderPath);
         if (folder.isDirectory()) {
@@ -40,11 +85,36 @@ public class TemporalNexusGame {
             }
         }
 
-        // Use the eventScenarios list as needed
-        for (EventScenario eventScenario : eventScenarios) {
-            System.out.println("Scenario: " + eventScenario.getCurrentScene().getDescription());
-            System.out.println("Choices: " + eventScenario.getChoices());
-            System.out.println();
+        return !eventScenarios.isEmpty();
+    }
+
+    private void setCurrentEventScenario(EventScenario eventScenario) {
+        currentEventScenario = eventScenario;
+    }
+
+    private void displayChoices() {
+        Map<String, String> choices = currentEventScenario.getChoices();
+        for (Map.Entry<String, String> entry : choices.entrySet()) {
+            System.out.println("- " + entry.getKey());
         }
+        System.out.println("- " + EXIT_CHOICE);
+    }
+
+    private EventScenario getNextEventScenario(String choice) {
+        Map<String, String> choices = currentEventScenario.getChoices();
+        String nextScenarioId = choices.get(choice);
+        if (nextScenarioId != null) {
+            return findEventScenarioById(nextScenarioId);
+        }
+        return null;
+    }
+
+    private EventScenario findEventScenarioById(String scenarioId) {
+        for (EventScenario eventScenario : eventScenarios) {
+            if (eventScenario.getId().equals(scenarioId)) {
+                return eventScenario;
+            }
+        }
+        return null;
     }
 }
