@@ -1,0 +1,12 @@
+{
+    "id": "eventScenarioId2",
+    "currentScene": {
+      "id": "scene2",
+      "description": "2"
+    },
+    "choices": {
+      "choice 1 for eventJSON2": "scene2",
+      "choice 2 for eventJSON2": "scene3"
+    }
+  }
+  
