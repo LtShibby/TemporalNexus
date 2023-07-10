@@ -1,14 +1,13 @@
 package com.wozniak.game.TemporalNexus;
 
+import com.wozniak.game.TemporalNexus.models.events.EventScenario;
+import com.wozniak.game.TemporalNexus.utils.EventUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
-import com.wozniak.game.TemporalNexus.models.events.EventScenario;
-import com.wozniak.game.TemporalNexus.utils.EventUtils;
 
 public class TemporalNexusGame {
     public static void main(String[] args) {

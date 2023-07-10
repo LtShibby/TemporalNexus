@@ -1,8 +1,0 @@
-com\wozniak\game\TemporalNexus\exampleAdventureGame\AdventureScene.class
-com\wozniak\game\TemporalNexus\models\events\EventScene.class
-com\wozniak\game\TemporalNexus\utils\EventUtils.class
-com\wozniak\game\TemporalNexus\models\events\EventScenario.class
-com\wozniak\game\TemporalNexus\exampleAdventureGame\AdventureGame.class
-com\wozniak\game\TemporalNexus\TemporalNexusGame.class
-com\wozniak\game\TemporalNexus\exampleAdventureGame\AdventureChoice.class
-com\wozniak\game\TemporalNexus\models\events\EventChoice.class

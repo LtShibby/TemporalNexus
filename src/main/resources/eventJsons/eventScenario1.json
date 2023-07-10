@@ -1,0 +1,11 @@
+{
+  "id": "eventScenario1",
+  "currentScene": {
+    "id": "scene1",
+    "description": "Assassination of Julius Caesar"
+  },
+  "choices": {
+    "1. Prevent the assassination": "Branch 3: Caesarian Influence",
+    "2. Let the assassination happen": "Branch 4: Roman Consequence"
+  }
+}
